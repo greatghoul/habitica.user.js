@@ -92,7 +92,7 @@
   }
 
   function doUpload(blob) {
-    var textField = document.querySelector('textarea.hc-upload-textarea');
+    var textField = getChatTexarea();
     if (!textField) {
       log('textarea not found, abort upload', 'warn');
       return;
@@ -177,12 +177,15 @@
     }
   });
 
+  function getChatTexarea() {
+    return document.querySelector('.chat-row textarea');
+  }
+
   function render() {
-    document.querySelectorAll('.chat-row textarea').forEach(function(ta) {
-      if (ta === ta.closest('.chat-row').querySelector('textarea')) {
-        injectToolbar(ta);
-      }
-    });
+    const textarea = getChatTexarea();
+    if (!textarea) return;
+
+    injectToolbar(textarea);
   }
 
   var observer = new MutationObserver(render);
