@@ -87,6 +87,8 @@
     var textBeforeCursorPosition = textField.value.substring(0, cursorPosition);
     var textAfterCursorPosition = textField.value.substring(cursorPosition, textField.value.length);
     textField.value = textBeforeCursorPosition + "![](" + imageUrl + ")" + textAfterCursorPosition;
+    textField.dispatchEvent(new Event('input', { bubbles: true }));
+    textField.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   function doUpload(blob) {
